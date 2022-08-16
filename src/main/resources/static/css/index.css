@@ -1,0 +1,443 @@
+html {
+    font-size: 20px;
+}
+
+body {
+    margin: 0;
+
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 1rem;
+    line-height: 1.5;
+}
+
+*,
+*:before,
+*:after {
+    box-sizing: border-box;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    margin: 0;
+}
+
+a {
+    color: black;
+    text-decoration: none;
+}
+
+p {
+    margin: 0 0 10px;
+}
+
+ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.container {
+    width: 100%;
+    max-width: 1200px;
+    height: auto;
+
+    margin: 0 auto;
+}
+
+/* =============== PAGE =============== */
+
+.page {
+    width: 100%;
+    height: 100%;
+
+    background: rgb(214, 214, 214);
+}
+
+/* =============== HEADER =============== */
+
+.header {
+    background: rgb(255, 237, 213);
+    padding: 0.001rem;
+
+    position: relative;
+    width: 100%;
+}
+
+.header-main {
+    width: 100%;
+
+    background-color: rgb(255, 145, 0);
+    position: fixed;
+
+    z-index: 666;
+
+    border-bottom: solid 0.1rem rgb(255, 189, 90);
+
+    box-shadow: 0 2px 5px rgb(58, 58, 58);
+}
+
+.contacts {
+    background-color: rgb(66, 66, 66);
+
+    font-size: 1vw;
+    font-family: 'Courier New', Courier, monospace;
+    text-align: center;
+    color: aliceblue;
+
+    margin: 0;
+    padding: 1px;
+
+    border-bottom-style: solid;
+    border-radius: 0.1em;
+    border-color: rgb(255, 189, 90);
+
+    width: 100%;
+}
+
+.contact-link {
+    color: aliceblue;
+
+    text-align: center;
+
+    margin: 0 1.5rem 0 1.5rem;
+    padding: 0 0.5rem 0 0.5rem;
+}
+
+.contact-link:hover {
+
+    background-color: rgb(255, 251, 246);
+    color: rgb(73, 73, 73);
+
+    border-radius: 1rem;
+
+    opacity: 0.8;
+    transition: 0.5s;
+}
+
+.contacts img {
+    width: 1.5em;
+    vertical-align: middle;
+}
+
+.header-inner {
+
+    align-items: center;
+
+    display: flex;
+    justify-content: space-between;
+}
+
+.header-logo {
+    width: 18%;
+}
+
+.header-logo img {
+    display: block;
+
+    border: 0.2rem solid rgb(255, 189, 90);
+    border-radius: 3rem;
+
+    width: 100%;
+    max-width: 1200px;
+    height: auto;
+
+    margin: 0 auto;
+}
+
+.header-nav {
+    font-size: 10px;
+}
+
+.header-nav-link {
+    align-items: center;
+
+    display: inline-flex;
+
+    vertical-align: middle;
+
+    font-size: 1.5vw;
+
+    margin-left: 5rem;
+    padding: 0.2rem;
+
+    border: 2px solid rgb(255, 189, 90);
+    border-radius: 2rem;
+
+    text-decoration: underline transparent;
+}
+
+.header-logo img:hover,
+.header-nav-link:hover {
+    background-color: azure;
+    border-radius: 0.8rem;
+    border-color: rgb(255, 0, 0);
+    transition: 1s;
+
+    text-decoration: underline;
+}
+
+.header-nav-link-img {
+    height: 2vw;
+}
+
+/* =============== CONTENT =============== */
+
+.content {
+    margin-top: 100px;
+
+    display: grid;
+    grid-template-columns: 2fr 5fr;
+}
+
+.content-block {
+    background-color: rgb(255, 255, 255);
+
+    min-height: 300px;
+
+    margin: 1vw;
+
+    border: 1px solid rgb(255, 255, 255);
+    border-radius: 0.5rem;
+
+    box-shadow: 0 3px 10px rgb(31, 31, 31);
+
+}
+
+/*-----SIDEBAR-----*/
+
+.sidebar {
+    background-color: transparent;
+    border: transparent;
+    box-shadow: none;
+}
+
+.categories {
+    padding: 0.3em;
+
+    font-size: 100%;
+
+    background-color: white;
+
+    border-radius: 0.5em;
+    border-style: solid;
+    border-width: 2px;
+    border-color: rgb(255, 255, 255);
+
+    box-shadow: 0px 0.2em 0.3em rgb(136, 136, 136);
+}
+
+.category-element {
+    color: black;
+    display: block;
+    padding: 0.5em;
+}
+
+.category-element:hover {
+    background-color: rgb(223, 223, 223);
+    color: rgb(255, 174, 0);
+
+    border-radius: 0.3em;
+
+    transition: linear 0.3s;
+}
+
+.icons--product-categories {
+    width: 1.3em;
+    height: 1.5em;
+
+    vertical-align: -0.2em;
+
+    margin-right: 0.2em;
+
+}
+
+/*-----DROP MENU-----*/
+
+a:hover {
+    background-color: rgb(223, 223, 223);
+    color: rgb(255, 174, 0);
+
+    border-radius: 0.2em;
+}
+
+li {
+    text-align: left;
+}
+
+.menu-list {
+    position: relative;
+
+    font-size: 100%;
+}
+
+.menu-list::after {
+    content: " ";
+    position: absolute;
+    border: 0.4em solid;
+    border-color: transparent transparent transparent rgb(114, 114, 114);
+    top: 0.8em;
+    right: 0.4em;
+    transition: 0.5s;
+}
+
+.menu-list:hover::after {
+    transform: scaleX(-1);
+}
+
+.menu-sublist {
+    opacity: 0;
+
+    position: absolute;
+
+    left: 100%;
+    top: -9999em;
+
+    font-size: 1.5vw;
+    line-height: 1.5;
+    padding: 0.1em 0.9em;
+
+    transition: 0.8s opacity;
+    background-color: rgb(255, 255, 255);
+    border-radius: 0.2em;
+    box-shadow: 0 2px 5px rgb(182, 182, 182);
+
+    border-left: 10px solid transparent;
+
+    width: fit-content;
+}
+
+.menu-top li:hover .menu-sublist {
+    opacity: 1;
+
+    top: 0em;
+}
+
+/*-----MAIN-----*/
+
+.main {
+    display: grid;
+
+    grid-template-columns: repeat(3, 1fr);
+    justify-items: stretch;
+    align-items: stretch;
+}
+
+.main > div {
+    background-color: transparent;
+
+    margin: 0.3rem;
+    padding: 0.1rem;
+
+    border-radius: 0.5rem;
+}
+
+.box1 {
+    grid-column: 1/3;
+    grid-row: 1/3;
+}
+
+.box img {
+    object-fit: fill;
+
+    width: 100%;
+    height: 100%;
+
+    border-radius: 0.5rem;
+}
+
+
+/*----- POPUP WINDOW FOR SIGNIN/SIGNUP*/
+
+.popup-bg {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.7);
+    display: none;
+
+    z-index: 123;
+}
+
+.popup {
+    position: absolute;
+
+
+    font-size: 90%;
+
+    top: 50%;
+    left: 50%;
+
+    width: auto;
+    height: auto;
+
+    background-color: white;
+
+    padding: 20px;
+    transform: translate(-50%, -50%);
+
+    border-radius: 0.5rem;
+}
+
+.popup-form {
+    display: grid;
+    grid-template-columns: 100%;
+    justify-items: stretch;
+    align-items: stretch;
+}
+
+/*.popup p {*/
+/*    font-size: 150%;*/
+/*    font-weight: 900;*/
+/*}*/
+
+.popup a {
+    display: block;
+    font-size: small;
+    margin-top: 2rem;
+    background-color: white;
+    text-decoration: underline;
+}
+
+.popup-bg.open {
+    display: block;
+}
+
+.close-popup {
+    position: absolute;
+    width: 1em;
+    top: 3px;
+    right: 3px;
+    cursor: pointer;
+}
+
+.signin-label {
+    font-size: large;
+}
+
+.signin-input {
+    font-size: large;
+    padding: 10px;
+}
+
+.btn {
+    display: block;
+
+    font-size: 100%;
+    background-color: rgb(170, 170, 170);
+
+    width: fit-content;
+    transform: translate(50%, 0%);
+
+    cursor: pointer;
+}
+
+.btn:hover {
+    color: white;
+    background-color: rgb(255, 188, 101);
+}
