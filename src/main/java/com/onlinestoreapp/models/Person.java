@@ -7,7 +7,7 @@ import javax.persistence.Table;
 import javax.validation.constraints.Email;
 
 @Entity
-@Table(name = "person")
+@Table(name = "person_credentials")
 public class Person {
 
     @Id
@@ -18,7 +18,7 @@ public class Person {
     @Email
     private String personEmail;
 
-    @Column(name = "password")
+    @Column(name = "person_password")
     private String password;
 
     public Person() {
