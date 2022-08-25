@@ -1,5 +1,7 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="www.thymeleaf.org/extras/spring-security">
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
 <head>
 	<meta charset="UTF-8">
@@ -35,12 +37,16 @@
 					</div>
 
 					<nav class="header-nav">
-						<a class="header-nav-link" href="">
+						<a class="header-nav-link" href="" sec:authorize="isAuthenticated()">
 							<img class="header-nav-link-img" src="img/cart1.svg" alt="">&nbsp;Cart&nbsp;
 						</a>
 
-						<a class="header-nav-link open-popup" id="open-popup" href="">
+						<a class="header-nav-link" href="" sec:authorize="isAuthenticated()">
 							<img class="header-nav-link-img" src="img/person.svg" alt="">&nbsp;Profile&nbsp;
+						</a>
+
+						<a class="header-nav-link open-popup" id="open-popup" href="" sec:authorize="isAnonymous()">
+							<img class="header-nav-link-img" src="img/login-icon.svg" alt="">&nbsp;Sign In&nbsp;
 						</a>
 					</nav>
 				</div>
@@ -117,14 +123,14 @@
 	<div class="popup" id="pop_up_body">
 		<img class="close-popup" id="close-popup" src="img/close-btn.svg" alt="close-btn">
 		<h3>SIGN IN</h3>
-		<form class="popup-form" action="#">
+		<form th:method="POST" class="popup-form" action="/process_login">
 			<label class="signin-label" for="email">Enter email:</label>
 			<input class="signin-input" type="text" id="email">
 			<br>
 			<label class="signin-label" for="password">Enter password:</label>
 			<input class="signin-input" type="password" id="password">
 			<br>
-			<input class="btn" type="button" value="Sign In"></input>
+			<input class="btn" type="submit" value="Sign In"></input>
 		</form>
 		<a href="/signup">Don't have an account yet? Sign up!</a>
 		<script src="js/index.js"></script>

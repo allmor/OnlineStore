@@ -27,16 +27,16 @@ public class SecurityConfig {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http.authorizeRequests()
                 .antMatchers("/", "/auth/login", "/auth/registration", "/error").permitAll()
-                .anyRequest().hasAnyRole("USER", "ADMIN")
+                .anyRequest().hasAnyRole("USER", "ADMIN", "IS_AUTHENTICATED_ANONYMOUSLY")
                 .and()
-                .formLogin().loginPage("/auth/login")
+                .formLogin().loginPage("/index")
                 .loginProcessingUrl("/process_login")
-                .defaultSuccessUrl("/hello", true)
+                .defaultSuccessUrl("/index", true)
                 .failureUrl("/auth/login?error")
                 .and()
                 .logout()
                 .logoutUrl("/logout")
-                .logoutSuccessUrl("/auth/login");
+                .logoutSuccessUrl("/index");
 
         return http.build();
     }
