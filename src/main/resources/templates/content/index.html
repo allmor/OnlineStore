@@ -31,21 +31,29 @@
 			<div class="container">
 				<div class="header-inner">
 					<div class="header-logo">
-						<a href="">
+						<a href="/">
 							<img src="img/onlinestoreos.svg" alt="">
 						</a>
 					</div>
 
 					<nav class="header-nav">
-						<a class="header-nav-link" href="" sec:authorize="isAuthenticated()">
+						<a class="header-nav-link" href="" sec:authorize="hasRole('USER')">
 							<img class="header-nav-link-img" src="img/cart1.svg" alt="">&nbsp;Cart&nbsp;
 						</a>
 
-						<a class="header-nav-link" href="" sec:authorize="isAuthenticated()">
-							<img class="header-nav-link-img" src="img/person.svg" alt="">&nbsp;Profile&nbsp;
+						<a class="header-nav-link" href="" sec:authorize="hasRole('ADMIN')">
+							<img class="header-nav-link-img" src="img/settings.svg" alt="">&nbsp;Settings&nbsp;
 						</a>
 
-						<a class="header-nav-link open-popup" id="open-popup" href="" sec:authorize="isAnonymous()">
+						<a class="header-nav-link" href="/logout" sec:authorize="isAuthenticated()">
+							<img class="header-nav-link-img" src="img/logout-icon.svg" alt=""> Logout
+						</a>
+
+						<!--						<a class="header-nav-link open-popup" id="open-popup" href="" sec:authorize="isAnonymous()">-->
+						<!--							<img class="header-nav-link-img" src="img/login-icon.svg" alt="">&nbsp;Sign In&nbsp;-->
+						<!--						</a>-->
+
+						<a class="header-nav-link" th:href="@{/login}" sec:authorize="isAnonymous()">
 							<img class="header-nav-link-img" src="img/login-icon.svg" alt="">&nbsp;Sign In&nbsp;
 						</a>
 					</nav>
@@ -58,12 +66,13 @@
 		<aside class="sidebar content-block">
 			<nav class="categories">
 				<ul class="menu-top">
-					<li class="menu-list"><a href="">
+					<li class="menu-list"><a href="catalog/home_appliance">
                                 <span class="category-element">
-                                    <img class="icons--product-categories" src="img/washing-machine.svg" alt=""> Home
-                                    appliance</span></a>
+                                    <img class="icons--product-categories"
+                                         src="img/washing-machine.svg" alt=""> Home appliance
+                                </span></a>
 						<ul class="menu-sublist">
-							<li><a href="">Refrigerators</a></li>
+							<li><a href="catalog/refrigerators">Refrigerators</a></li>
 							<li><a href="">Stoves</a></li>
 						</ul>
 					</li>
@@ -104,38 +113,37 @@
 		</aside>
 
 		<main class="main content-block">
-
 			<div class="box box1">
-				<img src="img/under-construction.jpg" alt="under construction">
+				<img src="img/maintenance.jpeg" alt="under construction">
 			</div>
 			<div class="box box2">
-				<img src="img/under-construction.jpg" alt="under construction">
+				<img src="img/maintenance.jpeg" alt="under construction">
 			</div>
-
 			<div class="box box3">
-				<img src="img/under-construction.jpg" alt="under construction">
+				<img src="img/maintenance.jpeg" alt="under construction">
 			</div>
 		</main>
 	</div>
 </div>
 
-<div class="popup-bg" id="pop_up">
-	<div class="popup" id="pop_up_body">
-		<img class="close-popup" id="close-popup" src="img/close-btn.svg" alt="close-btn">
-		<h3>SIGN IN</h3>
-		<form th:method="POST" class="popup-form" action="/process_login">
-			<label class="signin-label" for="email">Enter email:</label>
-			<input class="signin-input" type="text" id="email">
-			<br>
-			<label class="signin-label" for="password">Enter password:</label>
-			<input class="signin-input" type="password" id="password">
-			<br>
-			<input class="btn" type="submit" value="Sign In"></input>
-		</form>
-		<a href="/signup">Don't have an account yet? Sign up!</a>
-		<script src="js/index.js"></script>
-	</div>
-</div>
+<!--   //////////   SIGN IN FROM   //////////   -->
+<!--<div class="popup-bg" id="pop_up">-->
+<!--	<div class="popup" id="pop_up_body">-->
+<!--		<img class="close-popup" id="close-popup" src="img/close-btn.svg" alt="close-btn">-->
+<!--		<h3>SIGN IN</h3>-->
+<!--		<form th:method="POST" class="popup-form" th:action="@{/process_login}" th:object="${person}">-->
+<!--			<label class="signin-label" for="email">Enter email:</label>-->
+<!--			<input class="signin-input" type="text" id="email" th:field="*{personEmail}">-->
+<!--			<br>-->
+<!--			<label class="signin-label" for="password">Enter password:</label>-->
+<!--			<input class="signin-input" type="password" id="password" th:field="*{personPassword}">-->
+<!--			<br>-->
+<!--			<input class="btn" type="submit" value="Sign In"></input>-->
+<!--		</form>-->
+<!--		<a href="/login">Don't have an account yet? Sign up!</a>-->
+<!--		<script src="js/index.js"></script>-->
+<!--	</div>-->
+<!--</div>-->
 
 </body>
 
