@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="/css/catalog.css">
+	<title th:text="${productTypeName}">Subcategory_Title</title>
+</head>
+
+<body>
+<div class="page">
+
+	<header class="header">
+		<div class="header-main">
+			<div class="container">
+				<div class="header-inner">
+					<div class="header-logo">
+						<a href="/">
+							<img src="/img/onlinestoreos.svg" alt="">
+						</a>
+					</div>
+
+					<nav class="header-nav">
+						<a class="header-nav-link" href="" sec:authorize="isAuthenticated()">
+							<img class="header-nav-link-img" src="/img/cart1.svg" alt="">&nbsp;Cart&nbsp;
+						</a>
+
+						<a class="header-nav-link" href="" sec:authorize="hasRole('ADMIN')">
+							<img class="header-nav-link-img" src="/img/settings.svg" alt="">&nbsp;Settings&nbsp;
+						</a>
+
+						<a class="header-nav-link" href="/logout" sec:authorize="isAuthenticated()">
+							<img class="header-nav-link-img" src="/img/logout-icon.svg" alt=""> Logout
+						</a>
+
+						<a class="header-nav-link" th:href="@{/login}" sec:authorize="isAnonymous()">
+							<img class="header-nav-link-img" src="/img/login-icon.svg" alt="">&nbsp;Sign In&nbsp;
+						</a>
+					</nav>
+				</div>
+			</div>
+		</div>
+	</header>
+
+	<main class="main">
+		<div class="nav-bar">
+			<ol>
+				<a href="/catalog"><span>Catalog</span></a>
+				<li class="nav-link"><a th:href="@{/catalog/category/{cat} (cat=${product_category_name})}">
+					<span th:text="${productCategoryCorrectlyName}">Product Category Name</span></a></li>
+				<li class="nav-link"><span th:text="${productTypeName}">Product Type Name</span></li>
+
+			</ol>
+		</div>
+		<br><br>
+		<h2 th:text="${productTypeName}">SubCategory Name</h2>
+		<div class="table-products">
+
+			<!--			if category is empty    -->
+			<div th:if="${products.isEmpty()}">
+				<span>THIS CATEGORY IS EMPTY</span>
+			</div>
+
+			<!--			if category is not empty    -->
+			<tr th:each="product:${products}">
+
+				<div class="table-products mainbox">
+
+					<div name="img-block" class="img-block">
+						<div name="image-part" class="image-wrap">
+							<img th:if="${product.getImages().size() > 0}"
+							     th:src="@{/images/{id} (id=${product.getImages().get(0).getId()})}">
+						</div>
+						<div name="image-part" class="image-wrap">
+							<img class="noimg" th:if="${product.getImages().size() == 0}"
+							     src="/img/noimg.jpg">
+						</div>
+					</div>
+
+					<div name="description-block">
+						<a th:method="GET"
+						   th:href="@{/product/show-product/{id} (id=${product.getId()})}">
+							<div class="product-name" name="name" th:text="${product.getProductName()}">
+								Product Name
+							</div>
+							<div class="product-description" th:text="'[' + ${product.getDescription()} + ']'">
+								Product Description
+							</div>
+							<div th:text="'Price: ' + ${product.getPrice()}">
+								Product Price
+							</div>
+						</a>
+					</div>
+
+					<div name="buttons-block">
+						<form class="form-decoration"
+						      th:action="@{/product/add-to-cart}"
+						      th:method="POST"
+						      sec:authorize="isAuthenticated()">
+							<input type="hidden" name="product-id" th:value="${product.getId()}">
+							<button type="submit" class="add-to-cart-button">Add to cart</button>
+						</form>
+					</div>
+				</div>
+			</tr>
+			<!--			goto add new product page   -->
+			<div class="table-products" sec:authorize="hasRole('ADMIN')">
+				<a href="/product/admin/add-product"><img src="/img/add_new.jpg" width="22px">ADD NEW PRODUCT</a>
+			</div>
+		</div>
+
+		<div class="pagination-block" th:if="${!products.isEmpty()}">
+			Total items: [[${totalItems}]] &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			Page [[${currentPage}]] of [[${totalPages}]]
+			<br>
+			<br>
+			<div class="pages-block">
+			<span  th:each="i : ${#numbers.sequence(1, totalPages)}">
+				<a class="pages" th:href="@{/catalog/subcategory/{typeName}/{i} (typeName=${typeName},  i=${i})}">[[${i}]]</a>
+			</span>
+			</div>
+		</div>
+	</main>
+</div>
+</body>
+
+</html>

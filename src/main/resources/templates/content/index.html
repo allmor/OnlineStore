@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="css/index.css" type="text/css">
+	<title>onlinestore</title>
+</head>
+
+<body>
+
+<div class="page">
+
+	<header class="header">
+		<div class="header-main">
+			<div class="contacts">
+				Contact me:
+				<a class="contact-link" href="mailto:allmor@mail.ru">
+					<img src="img/mail_ru_logo_icon.svg" alt="">
+					allmor@mail.ru
+				</a>
+				<a class="contact-link" href="https://t.me/allmortg" target="_blank">
+					<img src="img/telegram_logo_icon.svg" alt="">
+					@allmortg
+				</a>
+			</div>
+			<div class="container">
+				<div class="header-inner">
+					<div class="header-logo">
+						<a href="/">
+							<img src="img/onlinestoreos.svg" alt="">
+						</a>
+					</div>
+
+					<nav class="header-nav">
+						<a class="header-nav-link" th:href="@{cart/{id}(id=${person.getCart.getCartId})}" sec:authorize="hasRole('USER')">
+							<img class="header-nav-link-img" src="img/cart1.svg" alt="">&nbsp;Cart&nbsp;
+						</a>
+
+						<a class="header-nav-link" href="/admin/admin-panel" sec:authorize="hasRole('ADMIN')">
+							<img class="header-nav-link-img" src="img/settings.svg" alt="">&nbsp;Settings&nbsp;
+						</a>
+
+						<a class="header-nav-link" href="/logout" sec:authorize="isAuthenticated()">
+							<img class="header-nav-link-img" src="img/logout-icon.svg" alt=""> Logout
+						</a>
+
+						<!--						<a class="header-nav-link open-popup" id="open-popup" href="" sec:authorize="isAnonymous()">-->
+						<!--							<img class="header-nav-link-img" src="img/login-icon.svg" alt="">&nbsp;Sign In&nbsp;-->
+						<!--						</a>-->
+
+						<a class="header-nav-link" th:href="@{/login}" sec:authorize="isAnonymous()">
+							<img class="header-nav-link-img" src="img/login-icon.svg" alt="">&nbsp;Sign In&nbsp;
+						</a>
+					</nav>
+				</div>
+			</div>
+		</div>
+	</header>
+
+	<div class="content">
+		<aside class="sidebar content-block">
+			<nav class="categories">
+				<ul class="menu-top">
+					<li class="menu-list">
+						<a href="catalog/category/home_appliance">
+                                <span class="category-element">
+                                    <img class="icons--product-categories"
+                                         src="img/washing-machine.svg" alt=""> Home appliance
+                                </span>
+						</a>
+						<ul class="menu-sublist">
+							<li><a href="catalog/subcategory/refrigerators">Refrigerators</a></li>
+							<li><a href="catalog/subcategory/stoves">Stoves</a></li>
+						</ul>
+					</li>
+					<br>
+					<li class="menu-list"><a href="catalog/category/smartphones_and_gadgets">
+                                <span class="category-element"> <img class="icons--product-categories"
+                                                                     src="img/phone.svg"
+                                                                     alt="">
+                                    Smartphones and gadgets </span></a>
+						<ul class="menu-sublist">
+							<li><a href="catalog/subcategory/smartphones">Smartphones</a></li>
+							<li><a href="catalog/subcategory/smartwatches">Smartwatches</a></li>
+						</ul>
+					</li>
+					<br>
+					<li class="menu-list"><a href="catalog/category/tv_and_multimedia">
+                                <span class="category-element"> <img class="icons--product-categories" src="img/tv.svg"
+                                                                     alt="">
+                                    TV and multimedia </span></a>
+						<ul class="menu-sublist">
+							<li><a href="catalog/subcategory/tvs">TV's</a></li>
+							<li><a href="catalog/subcategory/gameconsoles">Game consoles</a></li>
+						</ul>
+					</li>
+					<br>
+					<li class="menu-list"><a href="catalog/category/pc_and_parts">
+                                <span class="category-element"> <img class="icons--product-categories" src="img/pc.svg"
+                                                                     alt="">
+                                    PC and parts </span></a>
+						<ul class="menu-sublist">
+							<li><a href="catalog/subcategory/laptops">Laptops</a></li>
+							<li><a href="catalog/subcategory/parts_for_pc">Parts for PC</a></li>
+						</ul>
+					</li>
+					<br>
+				</ul>
+			</nav>
+		</aside>
+
+		<main class="main content-block">
+			<div class="box box1">
+				<img src="img/maintenance.jpeg" alt="under construction">
+			</div>
+			<div class="box box2">
+				<img src="img/maintenance.jpeg" alt="under construction">
+			</div>
+			<div class="box box3">
+				<img src="img/maintenance.jpeg" alt="under construction">
+			</div>
+		</main>
+	</div>
+</div>
+
+<!--   //////////   SIGN IN FROM   //////////   -->
+<!--<div class="popup-bg" id="pop_up">-->
+<!--	<div class="popup" id="pop_up_body">-->
+<!--		<img class="close-popup" id="close-popup" src="img/close-btn.svg" alt="close-btn">-->
+<!--		<h3>SIGN IN</h3>-->
+<!--		<form th:method="POST" class="popup-form" th:action="@{/process_login}" th:object="${person}">-->
+<!--			<label class="signin-label" for="email">Enter email:</label>-->
+<!--			<input class="signin-input" type="text" id="email" th:field="*{personEmail}">-->
+<!--			<br>-->
+<!--			<label class="signin-label" for="password">Enter password:</label>-->
+<!--			<input class="signin-input" type="password" id="password" th:field="*{personPassword}">-->
+<!--			<br>-->
+<!--			<input class="btn" type="submit" value="Sign In"></input>-->
+<!--		</form>-->
+<!--		<a href="/login">Don't have an account yet? Sign up!</a>-->
+<!--		<script src="js/index.js"></script>-->
+<!--	</div>-->
+<!--</div>-->
+
+</body>
+
+</html>

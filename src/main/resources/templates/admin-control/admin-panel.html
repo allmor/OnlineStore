@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+	<meta charset="UTF-8">
+	<link rel="stylesheet" href="/css/admin-panel.css">
+	<title>Admin panel</title>
+</head>
+<body>
+<a class="link--main-page" href="/">
+	<img class="image-wrap" src="/img/back-icon.svg">
+	<span>back to main page</span>
+</a>
+<div class="main-panel">
+	<div class="user-panel">
+		<h3>USERS LIST</h3>
+		<div th:each="person:${allPersons}">
+			<span th:each="role:${person.getRoles}">
+				<span th:text="${role.getRoleName} + ' '"></span>
+			</span>
+			<span th:text="${person.getName} + ' '">personsName</span>
+			<span th:text="${person.getSurname} + '; '">personsSurname</span>
+			<span th:text="${person.getCredentials.getPersonEmail}">personsEmail</span>
+			<a th:href="@{/admin/user-edit/{id}(id=${person.getId})}">
+				<img class="image-wrap" src="/img/edit.svg" alt="edit"/>
+			</a>
+			<a th:href="@{/admin/{id}(id=${person.getId})}" th:method="GET">
+				<img class="image-wrap" src="/img/recycle.svg" alt="delete"/>
+			</a>
+		</div>
+	</div>
+
+	<div class="product-panel">
+		<h3>PRODUCTS LIST</h3>
+		<table class="table">
+			<thead>
+			<tr>
+				<th>Type</th>
+				<th>Name</th>
+				<th>Price</th>
+				<th>Amount</th>
+			</tr>
+			</thead>
+			<tbody>
+			<tr th:each="product:${allProducts}">
+				<td th:text="${product.getProductType.getProductTypeName}"></td>
+				<td th:text="${product.getProductName}"></td>
+				<td th:text="${product.getPrice}"></td>
+				<td th:text="${product.getAmount}"></td>
+				<td>
+					<a href="/admin/product-edit">
+						<img class="image-wrap" src="/img/edit.svg" alt="edit"/>
+					</a>
+					<a href="/admin/product-delete">
+						<img class="image-wrap" src="/img/recycle.svg" alt="delete"/>
+					</a></td>
+			</tr>
+			</tbody>
+		</table>
+	</div>
+</div>
+</body>
+</html>

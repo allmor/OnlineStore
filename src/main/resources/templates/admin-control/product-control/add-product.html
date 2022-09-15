@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="/css/catalog.css">
+	<title>Add product page</title>
+</head>
+<body>
+
+<div class="page">
+
+	<header class="header">
+		<div class="header-main">
+			<div class="container">
+				<div class="header-inner">
+					<div class="header-logo">
+						<a href="/">
+							<img src="/img/onlinestoreos.svg" alt="">
+						</a>
+					</div>
+
+					<nav class="header-nav">
+						<a class="header-nav-link" href="" sec:authorize="hasRole('USER')">
+							<img class="header-nav-link-img" src="/img/cart1.svg" alt="">&nbsp;Cart&nbsp;
+						</a>
+
+						<a class="header-nav-link" href="" sec:authorize="hasRole('ADMIN')">
+							<img class="header-nav-link-img" src="/img/settings.svg" alt="">&nbsp;Settings&nbsp;
+						</a>
+
+						<a class="header-nav-link" href="/logout" sec:authorize="isAuthenticated()">
+							<img class="header-nav-link-img" src="/img/logout-icon.svg" alt=""> Logout
+						</a>
+
+						<a class="header-nav-link" th:href="@{/login}" sec:authorize="isAnonymous()">
+							<img class="header-nav-link-img" src="/img/login-icon.svg" alt="">&nbsp;Sign In&nbsp;
+						</a>
+					</nav>
+				</div>
+			</div>
+		</div>
+	</header>
+
+	<main class="main">
+		<h2>Add new product</h2>
+		<div class="table-products">
+			<form th:method="POST" th:object="${newProduct}"
+			      th:action="@{/product/admin/add-product}"
+			      enctype="multipart/form-data">
+
+				<label for="productName">Product name:</label>
+				<input type="text" id="productName"
+				       th:field="*{productName}" placeholder="enter product name here...">
+				<br>
+				<label for="productDescription">Product description:</label>
+				<input type="text" id="productDescription"
+				       th:field="*{description}" placeholder="enter product description here...">
+				<br>
+				<label for="productType">Product type:</label>
+				<select id="productType" th:field="*{productType}">
+					<option th:each="type: ${allProductTypes}"
+					        th:value="${type.getProductTypeId()}" th:text="${type.getProductTypeName()}">
+					</option>
+				</select>
+				<br>
+				<label for="productPrice">Product price:</label>
+				<input type="number" id="productPrice"
+				       th:field="*{price}" placeholder="enter product price here...">
+				<br>
+				<label for="productAmount">Product amount:</label>
+				<input type="number" id="productAmount"
+				       th:field="*{amount}" placeholder="enter amount of product...">
+				<br>
+				<input type="file" name="file1">
+				<input type="file" name="file2">
+				<input type="file" name="file3">
+				<br>
+				<br>
+				<input class="btn" type="submit" value="Add!">
+			</form>
+		</div>
+	</main>
+
+</div>
+
+</body>
+
+</html>

@@ -1,9 +1,10 @@
 package com.onlinestoreapp.services;
 
+import com.onlinestoreapp.models.Credentials;
 import com.onlinestoreapp.models.Person;
+import com.onlinestoreapp.repositories.CredentialRepository;
 import com.onlinestoreapp.repositories.PeopleRepository;
 import com.onlinestoreapp.security.PersonDetails;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -15,15 +16,19 @@ import java.util.Optional;
 public class PersonDetailsService implements UserDetailsService {
 
     private final PeopleRepository peopleRepository;
+    private final CredentialRepository credentialRepository;
 
-    @Autowired
-    public PersonDetailsService(PeopleRepository peopleRepository) {
+    public PersonDetailsService(PeopleRepository peopleRepository, CredentialRepository credentialRepository) {
         this.peopleRepository = peopleRepository;
+        this.credentialRepository = credentialRepository;
     }
+
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        Optional<Person> person = peopleRepository.findByPersonEmail(username);
+        Optional<Credentials> credentials = credentialRepository.findByPersonEmail(username);
+
+        Optional<Person> person = Optional.ofNullable(credentials.get().getPerson());
 
         if (person.isEmpty()) {
             throw new UsernameNotFoundException("User not found");

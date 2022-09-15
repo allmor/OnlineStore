@@ -3,6 +3,7 @@ package com.onlinestoreapp.models;
 import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
+import java.util.Arrays;
 
 @Entity
 @Table(name = "image")
@@ -99,5 +100,16 @@ public class Image {
         this.product = product;
     }
 
+    @Override
+    public String toString() {
+        return "Image{" +
+                "id=" + id +
+                ", fileName='" + fileName + '\'' +
+                ", size=" + size +
+                ", contentType='" + contentType + '\'' +
+                ", isPreviewImage=" + isPreviewImage +
+                ", product=" + product.getProductName() +
+                '}';
+    }
 }
 
