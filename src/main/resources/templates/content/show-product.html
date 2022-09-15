@@ -7,8 +7,8 @@
 	<meta charset="UTF-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<link rel="stylesheet" href="../css/catalog.css">
-	<title>Home Appliance</title>
+	<link rel="stylesheet" href="/css/catalog.css">
+	<title>Catalog</title>
 </head>
 
 <body>
@@ -20,25 +20,25 @@
 				<div class="header-inner">
 					<div class="header-logo">
 						<a href="/">
-							<img src="../img/onlinestoreos.svg" alt="">
+							<img src="/img/onlinestoreos.svg" alt="">
 						</a>
 					</div>
 
 					<nav class="header-nav">
 						<a class="header-nav-link" href="" sec:authorize="hasRole('USER')">
-							<img class="header-nav-link-img" src="../img/cart1.svg" alt="">&nbsp;Cart&nbsp;
+							<img class="header-nav-link-img" src="/img/cart1.svg" alt="">&nbsp;Cart&nbsp;
 						</a>
 
 						<a class="header-nav-link" href="" sec:authorize="hasRole('ADMIN')">
-							<img class="header-nav-link-img" src="../img/settings.svg" alt="">&nbsp;Settings&nbsp;
+							<img class="header-nav-link-img" src="/img/settings.svg" alt="">&nbsp;Settings&nbsp;
 						</a>
 
 						<a class="header-nav-link" href="/logout" sec:authorize="isAuthenticated()">
-							<img class="header-nav-link-img" src="../img/logout-icon.svg" alt=""> Logout
+							<img class="header-nav-link-img" src="/img/logout-icon.svg" alt=""> Logout
 						</a>
 
 						<a class="header-nav-link" th:href="@{/login}" sec:authorize="isAnonymous()">
-							<img class="header-nav-link-img" src="../img/login-icon.svg" alt="">&nbsp;Sign In&nbsp;
+							<img class="header-nav-link-img" src="/img/login-icon.svg" alt="">&nbsp;Sign In&nbsp;
 						</a>
 					</nav>
 				</div>
@@ -50,24 +50,15 @@
 		<div class="nav-bar">
 			<ol>
 				<a href="/catalog"><span>Catalog</span></a>
+				<li class="nav-link"><a th:href="@{/catalog/category/{cat} (cat=${product_category_name})}">
+					<span th:text="${productCategoryCorrectlyName}">Product Category Name</span></a></li>
+				<li class="nav-link"><span th:text="${productTypeName}">Product Type Name</span></li>
 
-				<li class="nav-link"><a href="/catalog/home_appliance"><span>Home Appliance</span></a></li>
-				<li class="nav-link"><span>Refrigerators</span></li>
-				<!-- <li class="nav-link"><a href="catalog.html"><span>Catalog</span></a></li>
-				<li></li>
-				<li></li> -->
 			</ol>
 		</div>
 		<br><br>
-		<h2>Refrigerators</h2>
-		<div class="table-products">
-			<tr th:each="product:${products}">
-				<div class="table-products product-block">
-					<div name="image"></div>
-					<div name="description"></div>
-				</div>
-			</tr>
-		</div>
+		<h2 th:text="${productTypeName}">SubCategory Name</h2>
+
 	</main>
 
 </div>

@@ -20,25 +20,25 @@
                     <div class="header-inner">
                         <div class="header-logo">
                             <a href="/">
-                                <img src="../img/onlinestoreos.svg" alt="">
+                                <img src="/img/onlinestoreos.svg" alt="">
                             </a>
                         </div>
 
                         <nav class="header-nav">
                             <a class="header-nav-link" href="" sec:authorize="hasRole('USER')">
-                                <img class="header-nav-link-img" src="../img/cart1.svg" alt="">&nbsp;Cart&nbsp;
+                                <img class="header-nav-link-img" src="/img/cart1.svg" alt="">&nbsp;Cart&nbsp;
                             </a>
 
                             <a class="header-nav-link" href="" sec:authorize="hasRole('ADMIN')">
-                                <img class="header-nav-link-img" src="../img/settings.svg" alt="">&nbsp;Settings&nbsp;
+                                <img class="header-nav-link-img" src="/img/settings.svg" alt="">&nbsp;Settings&nbsp;
                             </a>
 
                             <a class="header-nav-link" href="/logout" sec:authorize="isAuthenticated()">
-                                <img class="header-nav-link-img" src="../img/logout-icon.svg" alt=""> Logout
+                                <img class="header-nav-link-img" src="/img/logout-icon.svg" alt=""> Logout
                             </a>
 
                             <a class="header-nav-link" th:href="@{/login}" sec:authorize="isAnonymous()">
-                                <img class="header-nav-link-img" src="../img/login-icon.svg" alt="">&nbsp;Sign In&nbsp;
+                                <img class="header-nav-link-img" src="/img/login-icon.svg" alt="">&nbsp;Sign In&nbsp;
                             </a>
                         </nav>
                     </div>
@@ -50,10 +50,6 @@
             <div class="nav-bar">
                 <ol>
                     <a href="/catalog"><span>Catalog</span></a>
-                    <!-- <li class="nav-link"><a href="catalog.html"><span>Catalog</span></a></li>
-                    <li class="nav-link"><a href="catalog.html"><span>Catalog</span></a></li>
-                    <li></li>
-                    <li></li> -->
                 </ol>
             </div>
 
@@ -61,9 +57,9 @@
             <h2>Catalog</h2>
             <div class="category-items-container">
                 <div class="subcategory-items-container">
-                    <a href="catalog/home_appliance">
+                    <a href="catalog/category/home_appliance">
                         <div class="img-container">
-                            <img src="img/homeapp_category.jpg" alt="">
+                            <img src="/img/categories/homeapp_category.jpg" alt="">
                         </div>
                         <div class="subcategory-desc-container">
                             Home Appliance
@@ -71,9 +67,9 @@
                     </a>
                 </div>
                 <div class="subcategory-items-container">
-                    <a href="">
+                    <a href="catalog/category/smartphones_and_gadgets">
                         <div class="img-container">
-                            <img src="img/smartph_category.jpg" alt="">
+                            <img src="/img/categories/smartph_category.jpg" alt="">
                         </div>
                         <div class="subcategory-desc-container">
                             Smartphones and gadgets
@@ -81,9 +77,9 @@
                     </a>
                 </div>
                 <div class="subcategory-items-container">
-                    <a href="">
+                    <a href="catalog/category/tv_and_multimedia">
                         <div class="img-container">
-                            <img src="img/tv_multi_category.jpg" alt="">
+                            <img src="/img/categories/tv_multi_category.jpg" alt="">
                         </div>
                         <div class="subcategory-desc-container">
                             TV and multimedia
@@ -91,9 +87,9 @@
                     </a>
                 </div>
                 <div class="subcategory-items-container">
-                    <a href="">
+                    <a href="catalog/category/pc_and_parts">
                         <div class="img-container">
-                            <img src="img/pc_category.jpg" alt="">
+                            <img src="/img/categories/pc_category.jpg" alt="">
                         </div>
                         <div class="subcategory-desc-container">
                             PC and parts

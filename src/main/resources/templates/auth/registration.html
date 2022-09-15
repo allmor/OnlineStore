@@ -11,15 +11,18 @@
 </head>
 <body>
     <div class="registration-container">
-        <form class="registration-form" action="">
+        <form class="registration-form" th:action="@{/process_registration}"
+              th:object="${personCredentials}" th:method="POST">
             <h2>Registration</h2>
-            <input type="text" name="name" placeholder="Enter your name...">
+            <input type="text" name="name" th:field="*{personName}" placeholder="Enter your name...">
             <br>
-            <input type="email" name="email" placeholder="Enter your e-mail...">
+            <input type="text" name="surname" th:field="*{personSurname}" placeholder="Enter your surname...">
             <br>
-            <input type="password" name="password" placeholder="Enter your password...">
+            <input type="email" name="email" th:field="*{personEmail}" placeholder="Enter your e-mail...">
             <br>
-            <input type="password" name="password" placeholder="Repeat your password...">
+            <input type="password" name="password" th:field="*{personPassword}" placeholder="Enter your password...">
+            <br>
+            <input type="password" name="password" th:field="*{personPasswordRepeat}" placeholder="Repeat your password...">
             <br>
             <input class="btn" type="submit" value="Sign Up!">
         </form>

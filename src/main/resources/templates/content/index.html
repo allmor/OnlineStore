@@ -37,11 +37,11 @@
 					</div>
 
 					<nav class="header-nav">
-						<a class="header-nav-link" href="" sec:authorize="hasRole('USER')">
+						<a class="header-nav-link" th:href="@{cart/{id}(id=${person.getCart.getCartId})}" sec:authorize="hasRole('USER')">
 							<img class="header-nav-link-img" src="img/cart1.svg" alt="">&nbsp;Cart&nbsp;
 						</a>
 
-						<a class="header-nav-link" href="" sec:authorize="hasRole('ADMIN')">
+						<a class="header-nav-link" href="/admin/admin-panel" sec:authorize="hasRole('ADMIN')">
 							<img class="header-nav-link-img" src="img/settings.svg" alt="">&nbsp;Settings&nbsp;
 						</a>
 
@@ -66,45 +66,47 @@
 		<aside class="sidebar content-block">
 			<nav class="categories">
 				<ul class="menu-top">
-					<li class="menu-list"><a href="catalog/home_appliance">
+					<li class="menu-list">
+						<a href="catalog/category/home_appliance">
                                 <span class="category-element">
                                     <img class="icons--product-categories"
                                          src="img/washing-machine.svg" alt=""> Home appliance
-                                </span></a>
+                                </span>
+						</a>
 						<ul class="menu-sublist">
-							<li><a href="catalog/refrigerators">Refrigerators</a></li>
-							<li><a href="">Stoves</a></li>
+							<li><a href="catalog/subcategory/refrigerators">Refrigerators</a></li>
+							<li><a href="catalog/subcategory/stoves">Stoves</a></li>
 						</ul>
 					</li>
 					<br>
-					<li class="menu-list"><a href="">
+					<li class="menu-list"><a href="catalog/category/smartphones_and_gadgets">
                                 <span class="category-element"> <img class="icons--product-categories"
                                                                      src="img/phone.svg"
                                                                      alt="">
                                     Smartphones and gadgets </span></a>
 						<ul class="menu-sublist">
-							<li><a href="">Smartphones</a></li>
-							<li><a href="">Smartwatches</a></li>
+							<li><a href="catalog/subcategory/smartphones">Smartphones</a></li>
+							<li><a href="catalog/subcategory/smartwatches">Smartwatches</a></li>
 						</ul>
 					</li>
 					<br>
-					<li class="menu-list"><a href="">
+					<li class="menu-list"><a href="catalog/category/tv_and_multimedia">
                                 <span class="category-element"> <img class="icons--product-categories" src="img/tv.svg"
                                                                      alt="">
                                     TV and multimedia </span></a>
 						<ul class="menu-sublist">
-							<li><a href="">TV's</a></li>
-							<li><a href="">Game consoles</a></li>
+							<li><a href="catalog/subcategory/tvs">TV's</a></li>
+							<li><a href="catalog/subcategory/gameconsoles">Game consoles</a></li>
 						</ul>
 					</li>
 					<br>
-					<li class="menu-list"><a href="">
+					<li class="menu-list"><a href="catalog/category/pc_and_parts">
                                 <span class="category-element"> <img class="icons--product-categories" src="img/pc.svg"
                                                                      alt="">
                                     PC and parts </span></a>
 						<ul class="menu-sublist">
-							<li><a href="">Laptops</a></li>
-							<li><a href="">Parts for PC</a></li>
+							<li><a href="catalog/subcategory/laptops">Laptops</a></li>
+							<li><a href="catalog/subcategory/parts_for_pc">Parts for PC</a></li>
 						</ul>
 					</li>
 					<br>
