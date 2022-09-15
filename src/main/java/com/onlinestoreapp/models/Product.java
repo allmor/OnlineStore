@@ -1,21 +1,22 @@
 package com.onlinestoreapp.models;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Table(name = "item")
+@Table(name = "product")
 public class Product {
 
     @Id
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private Integer productId;
 
-    @Column(name = "item_name")
-    private String itemName;
+    @Column(name = "product_name")
+    private String productName;
 
     @Column(name = "description")
     private String description;
@@ -28,6 +29,13 @@ public class Product {
 
     @OneToMany(mappedBy = "product")
     private List<Image> images;
+
+    @ManyToOne
+    @JoinColumn(name = "product_type_id", referencedColumnName = "product_type_id")
+    private ProductType productType;
+
+    @ManyToMany(mappedBy = "products")
+    private List<Cart> carts;
 
     @Transient
     private Integer previewImageId;
@@ -43,26 +51,34 @@ public class Product {
     public Product() {
     }
 
-    public Product(String itemName, String description, Double price) {
-        this.itemName = itemName;
+    public Product(String productName, String description,
+                   Double price, Integer amount,
+                   List<Image> images, ProductType productType,
+                   Integer previewImageId, LocalDateTime dateOfCreation) {
+        this.productName = productName;
         this.description = description;
         this.price = price;
+        this.amount = amount;
+        this.images = images;
+        this.productType = productType;
+        this.previewImageId = previewImageId;
+        this.dateOfCreation = dateOfCreation;
     }
 
     public Integer getId() {
-        return id;
+        return productId;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public void setId(Integer productId) {
+        this.productId = productId;
     }
 
-    public String getItemName() {
-        return itemName;
+    public String getProductName() {
+        return productName;
     }
 
-    public void setItemName(String title) {
-        this.itemName = title;
+    public void setProductName(String title) {
+        this.productName = title;
     }
 
     public String getDescription() {
@@ -119,11 +135,19 @@ public class Product {
         images.add(image);
     }
 
+    public ProductType getProductType() {
+        return productType;
+    }
+
+    public void setProductType(ProductType productType) {
+        this.productType = productType;
+    }
+
     @Override
     public String toString() {
         return "Product{" +
-                "id=" + id +
-                ", title='" + itemName + '\'' +
+                "id=" + productId +
+                ", title='" + productName + '\'' +
                 ", description='" + description + '\'' +
                 ", price=" + price +
                 '}';
