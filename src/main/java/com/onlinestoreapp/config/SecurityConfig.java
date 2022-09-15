@@ -21,20 +21,6 @@ public class SecurityConfig {
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-
-//                .authorizeRequests()
-//                .antMatchers("/", "/auth/login", "/auth/registration", "/error").permitAll()
-//                .anyRequest().hasAnyRole("USER", "ADMIN", "IS_AUTHENTICATED_ANONYMOUSLY")
-//                .and()
-//                .formLogin().loginPage("/index")
-//                .loginProcessingUrl("/process_login")
-//                .defaultSuccessUrl("/index", true)
-//                .failureUrl("/auth/login?error")
-//                .and()
-//                .logout()
-//                .logoutUrl("/logout")
-//                .logoutSuccessUrl("/index");
-
         return http.csrf().disable()
                 .httpBasic()
                 .and()
@@ -49,11 +35,6 @@ public class SecurityConfig {
                 .anyRequest().permitAll()
                 .and()
                 .logout().logoutUrl("/logout").logoutSuccessUrl("/")
-                .and()
-                .rememberMe()
-                .tokenValiditySeconds(30)
-                .key("someKey")
-                .rememberMeParameter("rememberMe")
                 .and()
                 .build();
     }
