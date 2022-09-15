@@ -2,7 +2,7 @@ package com.onlinestoreapp.controllers;
 
 import com.onlinestoreapp.models.Credentials;
 import com.onlinestoreapp.models.Person;
-import com.onlinestoreapp.models.dtos.CredentialsDto;
+import com.onlinestoreapp.models.dtos.credential.CredentialsDto;
 import com.onlinestoreapp.services.CredentialsService;
 import com.onlinestoreapp.utils.CredentialsValidator;
 import org.springframework.beans.factory.annotation.Autowired;
