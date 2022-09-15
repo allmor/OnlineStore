@@ -5,11 +5,15 @@ import com.onlinestoreapp.models.Product;
 import com.onlinestoreapp.repositories.ImagesRepository;
 import com.onlinestoreapp.repositories.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -18,15 +22,18 @@ import java.util.Optional;
 public class ProductsService {
 
     private final ProductRepository productRepository;
+    private final ProductTypesService productTypesService;
     private final ImagesRepository imagesRepository;
 
     @Autowired
-    public ProductsService(ProductRepository productRepository, ImagesRepository imagesRepository) {
+    public ProductsService(ProductRepository productRepository, ProductTypesService productTypesService, ImagesRepository imagesRepository) {
         this.productRepository = productRepository;
+        this.productTypesService = productTypesService;
         this.imagesRepository = imagesRepository;
+
     }
 
-    public List<Product> getAllItems() {
+    public List<Product> getAll() {
         return productRepository.findAll();
     }
 
@@ -35,43 +42,62 @@ public class ProductsService {
         return item.orElse(null);
     }
 
+    // get all products by type
+    public List<Product> getProductsByType(String typeName) {
+        return productTypesService.getProductType(typeName).getProducts();
+    }
+
+    // get all products by type and with pagination
+    public Page<Product> findProductPage(String typeName, Integer pageNumber) {
+        Pageable pageable = PageRequest.of(pageNumber - 1, 3);
+        return productRepository.findAllByProductType(pageable, productTypesService.getProductType(typeName));
+    }
+
     // Saving new product with photos
     @Transactional
-    public void saveItem(Product product, MultipartFile f1, MultipartFile f2, MultipartFile f3) throws IOException {
-        Image image1;
-        Image image2;
-        Image image3;
+    public void saveItem(Product product, List<MultipartFile> list) throws IOException {
+        Product temp = null;
 
-        if (f1.getSize() != 0) {
-            image1 = toImageConverter(f1);
-            image1.setPreviewImage(true);
-            product.addImageToProduct(image1);
+        if (list.size() != 0) {
 
-            imagesRepository.save(image1);
+            List<Image> imageList = new ArrayList<>();
+
+            for (MultipartFile mpf : list) {
+                if (!mpf.isEmpty()) {
+                    Image tempImage = toImageConverter(mpf);
+                    tempImage.setPreviewImage(false);
+                    imageList.add(tempImage);
+
+                    int indexOfTempImage = imageList.indexOf(tempImage);
+
+                    if (indexOfTempImage == 0) {
+                        imageList.get(0).setPreviewImage(true);
+                    }
+
+                    product.addImageToProduct(imageList.get(indexOfTempImage));
+                    imagesRepository.save(imageList.get(indexOfTempImage));
+                }
+            }
+
+            temp = productRepository.save(product);
         }
-        if (f2.getSize() != 0) {
-            image2 = toImageConverter(f2);
-            image2.setPreviewImage(true);
-            product.addImageToProduct(image2);
 
-            imagesRepository.save(image2);
-        }
-        if (f3.getSize() != 0) {
-            image3 = toImageConverter(f3);
-            image3.setPreviewImage(true);
-            product.addImageToProduct(image3);
+        if (temp != null) {
+            temp.setPreviewImageId(product.getImages().get(0).getId());
 
-            imagesRepository.save(image3);
         }
+
+        productRepository.save(product);
+
 
 
         //setting preview and saving
-        Product i = productRepository.save(product);
-        i.setPreviewImageId(i.getImages().get(0).getId());
-        productRepository.save(product);
+//        Product productToSave = productRepository.save(product);
+//        productToSave.setPreviewImageId(productToSave.getImages().get(0).getId());
+//        productRepository.save(product);
     }
 
-    //Multipart file to Image Converter
+    //  Multipart file to Image Converter
     private Image toImageConverter(MultipartFile file) throws IOException {
         Image img = new Image();
         img.setFileName(file.getName());
